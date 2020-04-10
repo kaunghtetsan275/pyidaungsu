@@ -1,0 +1,40 @@
+import numpy as np
+from dataInputStream import DataInputStream
+
+class BinaryMarkov:
+    def __init__(self,logProbabilityDifferences=None):
+        self.logProbabilityDifferences = logProbabilityDifferences
+
+        f = open('model/zawgyiUnicodeModel.dat', 'rb')
+        dis = DataInputStream(f)
+        
+        size = 227
+        logProbabilityDifferences = np.zeros((size, size))
+
+        for ii1 in range(size):
+            entries = dis.read_short()
+
+            if (entries==0):
+                fallback=0.0
+            else:
+                fallback=dis.read_float()
+
+            nextt = -1
+
+            for ii2 in range(size):
+                if (entries > 0 and nextt < ii2):
+                        nextt = dis.read_short()
+                        entries=entries-1
+                if (nextt == ii2):
+                    logProbabilityDifferences[ii1][ii2] = dis.read_float()
+                else:
+                    logProbabilityDifferences[ii1][ii2] = fallback
+                    
+        logProbabilityDifferences = np.delete(logProbabilityDifferences, 0, 0)
+        logProbabilityDifferences = np.delete(logProbabilityDifferences, 1, 0)
+        logProbabilityDifferences = np.delete(logProbabilityDifferences, 2, 0)
+        logProbabilityDifferences = np.delete(logProbabilityDifferences, 3, 0)
+        self.logProbabilityDifferences = logProbabilityDifferences
+    
+    def getLogProbabilityDifference(self, prevState, currState):               
+        return self.logProbabilityDifferences[prevState][currState]
