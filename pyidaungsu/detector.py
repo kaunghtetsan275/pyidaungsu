@@ -1,5 +1,5 @@
-from dataInputStream import DataInputStream
-from binaryMarkov import BinaryMarkov
+from pyidaungsu.dataInputStream import DataInputStream
+from pyidaungsu.binaryMarkov import BinaryMarkov
 import math
 
 class Detector:

@@ -1,5 +1,5 @@
 import numpy as np
-from dataInputStream import DataInputStream
+from pyidaungsu.dataInputStream import DataInputStream
 
 class BinaryMarkov:
     def __init__(self,logProbabilityDifferences=None):
