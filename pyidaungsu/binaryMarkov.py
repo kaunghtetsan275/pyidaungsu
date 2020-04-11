@@ -1,11 +1,13 @@
 import numpy as np
+import os
 from pyidaungsu.dataInputStream import DataInputStream
 
 class BinaryMarkov:
     def __init__(self,logProbabilityDifferences=None):
         self.logProbabilityDifferences = logProbabilityDifferences
 
-        f = open('model/zawgyiUnicodeModel.dat', 'rb')
+        model_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),'model/zawgyiUnicodeModel.dat')
+        f = open(model_path, 'rb')
         dis = DataInputStream(f)
         
         size = 227

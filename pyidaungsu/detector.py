@@ -1,6 +1,6 @@
 from pyidaungsu.dataInputStream import DataInputStream
 from pyidaungsu.binaryMarkov import BinaryMarkov
-import math
+import math, os
 
 class Detector:
     def __init__(self):
@@ -46,7 +46,9 @@ class Detector:
         self.SSV_COUNT = 2
     
         BINARY_TAG = int(0x555A4D4F44454C20)
-        f = open('model/zawgyiUnicodeModel.dat', 'rb')
+
+        model_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),'model/zawgyiUnicodeModel.dat')
+        f = open(model_path, 'rb')
         dis = DataInputStream(f)
 
         # Check magic number and serial version number
@@ -94,10 +96,7 @@ class Detector:
             
             classifier = BinaryMarkov()
             if (prevState != 0 or currState != 0):
-                #print("Previous state: ",prevState,", Current state: ",currState);
                 delta = classifier.getLogProbabilityDifference(prevState, currState)
-                #print("Delta: ",delta)
-                #print("="*30)
                 totalDelta += delta
                 seenTransition = True
 
@@ -107,7 +106,6 @@ class Detector:
         if not seenTransition:
             return math.inf
         
-        #print("Total delta: ",totalDelta)
         return round(1.0/(1.0 + math.exp(totalDelta)))
 
     def detect(self, text):
@@ -115,3 +113,4 @@ class Detector:
             return "Zawgyi"
         else:
             return "Unicode"
+        return "Other tongue"
