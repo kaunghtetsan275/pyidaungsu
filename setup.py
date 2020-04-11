@@ -12,7 +12,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/kaunghtetsan275/pyidaungsu",
-    download_url = 'https://github.com/kaunghtetsan275/pyidaungsu/archive/0.0.2.tar.gz',
+    download_url = 'https://github.com/kaunghtetsan275/pyidaungsu/archive/0.0.3.tar.gz',
     packages=find_packages(),
     include_package_data=True,
     classifiers=[
