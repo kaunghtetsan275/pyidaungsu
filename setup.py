@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="pyidaungsu",
-    version="0.0.2",
+    version="0.0.3",
     author="Kaung Htet San",
     author_email="kaung@htetsan.me",
     description="Python library for Myanmar language",
