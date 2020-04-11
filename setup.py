@@ -1,9 +1,9 @@
-import setuptools
+from setuptools import setup, find_packages
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-setuptools.setup(
+setup(
     name="pyidaungsu",
     version="0.0.2",
     author="Kaung Htet San",
@@ -13,7 +13,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/kaunghtetsan275/pyidaungsu",
     download_url = 'https://github.com/kaunghtetsan275/pyidaungsu/archive/0.0.2.tar.gz',
-    packages=setuptools.find_packages(),
+    packages=find_packages(),
+    include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
