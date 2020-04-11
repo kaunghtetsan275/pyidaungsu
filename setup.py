@@ -14,7 +14,7 @@ setup(
     url="https://github.com/kaunghtetsan275/pyidaungsu",
     download_url = 'https://github.com/kaunghtetsan275/pyidaungsu/archive/0.0.4.tar.gz',
     packages=find_packages(),
-    package_data={'pyidaungsu','model/zawgyiUnicodeModel.dat'},
+    package_data={'pyidaungsu': ['*.dat', 'model/*.dat']},
     include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
