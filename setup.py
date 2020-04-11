@@ -5,15 +5,16 @@ with open("README.md", "r") as fh:
 
 setup(
     name="pyidaungsu",
-    version="0.0.3",
+    version="0.0.4",
     author="Kaung Htet San",
     author_email="kaung@htetsan.me",
     description="Python library for Myanmar language",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/kaunghtetsan275/pyidaungsu",
-    download_url = 'https://github.com/kaunghtetsan275/pyidaungsu/archive/0.0.3.tar.gz',
+    download_url = 'https://github.com/kaunghtetsan275/pyidaungsu/archive/0.0.4.tar.gz',
     packages=find_packages(),
+    package_data={'pyidaungsu','model/zawgyiUnicodeModel.dat'},
     include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
