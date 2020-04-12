@@ -38,5 +38,11 @@ class BinaryMarkov:
         logProbabilityDifferences = np.delete(logProbabilityDifferences, 3, 0)
         self.logProbabilityDifferences = logProbabilityDifferences
     
-    def getLogProbabilityDifference(self, prevState, currState):               
-        return self.logProbabilityDifferences[prevState][currState]
+    def getLogProbabilityDifference(self, prevState, currState):
+        probability = self.logProbabilityDifferences[prevState][currState]
+
+        # the state does not exist in the model, it will become multidimensional array instead of scalar value
+        # in that case, return probability value = 0
+        if probability.shape:
+            return 0
+        return probability

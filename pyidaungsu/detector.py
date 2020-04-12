@@ -81,11 +81,9 @@ class Detector:
             return cp - self.SPC_CP0 + self.SPC_OFFSET
     
     def predict(self, string):
-        #Start at the base state
         prevCp = 0
         prevState = 0
         totalDelta = 0.0
-        seenTransition = False
         for i,offset in enumerate(string):
             if (i == len(string)-1):
                 cp = 0
@@ -95,18 +93,18 @@ class Detector:
                 currState = self.getIndexForCodePoint(cp, self.ssv)
             
             classifier = BinaryMarkov()
+            if (prevState==None):
+                continue
             if (prevState != 0 or currState != 0):
                 delta = classifier.getLogProbabilityDifference(prevState, currState)
                 totalDelta += delta
-                seenTransition = True
 
             prevCp = cp
             prevState = currState
-            
-        if not seenTransition:
-            return math.inf
         
-        return round(1.0/(1.0 + math.exp(totalDelta)))
+        result = round(1.0/(1.0 + math.exp(totalDelta)))
+        
+        return result
 
     def detect(self, text):
         if self.predict(text):
