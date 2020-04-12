@@ -4,13 +4,13 @@ Python library for Myanmar language. Useful in Natural Language Processing and t
 
 ## Installation
 
-```
+```sh
 pip install pyidaungsu
 ```
 
 ## Usage
 
-#### Zawgyi-Unicode detection
+### Zawgyi-Unicode detection
 
 ```sh
 import pyidaungsu as pds
@@ -20,7 +20,7 @@ pds.detect("ထမင်းစားပြီးပြီလား")
 >> "Unicode"
 ```
 
-#### Zawgyi-Unicode conversion
+### Zawgyi-Unicode conversion
 
 ```sh
 # convert to zawgyi
@@ -32,7 +32,7 @@ pds.cvt2uni("ထမင္းစားၿပီးၿပီလား")
 >> "ထမင်းစားပြီးပြီလား"
 ```
 
-#### Syllabification
+### Syllabification
 
 ```sh
 # syllabification
