@@ -7,7 +7,7 @@ class Tokenize:
         self.shan_consonant = 'ၵၶငၸသၹၺတထၼပၽၾမယလဝရႁဢၷႀၻၿ'
         self.mon_consonant = 'ကခဂဃၚစဆဇၛညဋဌဍဎဏတထဒဓနပဖဗဘမယရလဝသဟဠၜအၝ'
         self.burmese_consonant = 'က-အ'
-        self.others = '၊။!-/:-@[-`{-~\s.'
+        self.others = '၀-၉၊။!-/:-@[-`{-~\s.'
 
     def create_char_features(self, sentence, i):
         features = [
