@@ -3,6 +3,7 @@ from pyidaungsu.binaryMarkov import BinaryMarkov
 from pyidaungsu.dataInputStream import DataInputStream
 from pyidaungsu.tokenize import Tokenize
 
+import emoji
 import re
 
 def cvt2zg(text):
@@ -21,10 +22,11 @@ def cvt2uni(text):
         text = re.sub(rule["from"], rule["to"], text)
     return text
 
-def detect(text):
-    text = re.sub('[a-zA-Z0-9\+\-\s]','',text)
-    if (len(text)>10):
-        text = text[:10]
+def detect(text, fco=17): # input text, first character occurence
+    text = emoji.get_emoji_regexp().sub(u'', text)
+    text = re.sub('[\\]\\{\\}\\[—）（></၊။«»·•●♦�‘’“”\u200b\u200c\ufeff၀-၉a-zA-Z0-9\+\-\s\.,:;…!@#\$%\^&\*\)\(\'\"–]','',text)
+    if (len(text)>fco):
+        text = text[:fco]
     return Detector().detect(text)
 
 def tokenize(text,lang='mm',form='syllable'):
