@@ -5,15 +5,15 @@ with open("README.md", "r") as fh:
 
 setup(
     name="pyidaungsu",
-    version="0.0.7",
+    version="0.0.8",
     author="Kaung Htet San",
     author_email="kaung@htetsan.me",
     description="Python library for Myanmar language",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/kaunghtetsan275/pyidaungsu",
-    download_url = 'https://github.com/kaunghtetsan275/pyidaungsu/archive/0.0.7.tar.gz',
-    install_requires=['numpy','python-crfsuite'],
+    download_url = 'https://github.com/kaunghtetsan275/pyidaungsu/archive/0.0.8.tar.gz',
+    install_requires=['numpy','python-crfsuite','emoji'],
     packages=find_packages(),
     package_data={'pyidaungsu': ['pyidaungsu/model/*']},
     include_package_data=True,
