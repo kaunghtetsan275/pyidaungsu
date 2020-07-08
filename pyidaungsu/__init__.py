@@ -1,10 +1,11 @@
-from pyidaungsu.detector import Detector
-from pyidaungsu.binaryMarkov import BinaryMarkov
-from pyidaungsu.dataInputStream import DataInputStream
 from pyidaungsu.tokenize import Tokenize
-
 import emoji
-import re
+import pyidaungsu.model.lib.fasttext_pybind as fasttext
+import re, os
+import numpy as np
+
+f = fasttext.fasttext()
+f.loadModel(os.path.join(os.path.abspath(os.path.dirname(__file__)),'model/pdsdetect.ftz'))
 
 def cvt2zg(text):
     rules = [
@@ -22,12 +23,35 @@ def cvt2uni(text):
         text = re.sub(rule["from"], rule["to"], text)
     return text
 
-def detect(text, fco=17): # input text, first character occurence
-    text = emoji.get_emoji_regexp().sub(u'', text)
-    text = re.sub('[\\]\\{\\}\\[—）（></၊။«»·•●♦�‘’“”\u200b\u200c\ufeff၀-၉a-zA-Z0-9\+\-\s\.,:;…!@#\$%\^&\*\)\(\'\"–]','',text)
-    if (len(text)>fco):
-        text = text[:fco]
-    return Detector().detect(text)
+def predict(text, k=1, threshold=0.0, on_unicode_error='strict'):
+    global f
+    
+    def check(entry):
+        if entry.find('\n') != -1:
+            raise ValueError(
+                "predict processes one line at a time (remove \'\\n\')"
+            )
+        entry += "\n"
+        return entry
+
+    if type(text) == list:
+        text = [check(entry) for entry in text]
+        all_labels, all_probs = f.multilinePredict(
+            text, k, threshold, on_unicode_error)
+
+        return all_labels, all_probs
+    else:
+        text = check(text)
+        predictions = f.predict(text, k, threshold, on_unicode_error)
+        if predictions:
+            probs, labels = zip(*predictions)
+        else:
+            probs, labels = ([], ())
+
+        return labels, np.array(probs, copy=False)
+
+def detect(text):
+    return predict(text)[0][0][9:]
 
 def tokenize(text,lang='mm',form='syllable'):
     return Tokenize().tokenize(text, lang, form)

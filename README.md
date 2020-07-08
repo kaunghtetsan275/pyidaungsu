@@ -10,14 +10,23 @@ pip install pyidaungsu
 
 ## Usage
 
-### Zawgyi-Unicode detection
+### ~~Zawgyi-Unicode detection~~ Language detection (Myanmar <Zawgyi, Unicode>, Karen, Mon, Shan)
+Starting from the pyidaungsu 0.0.9, it does not only detect Zawgyi and Unicode for Myanmar language but also other languages such as Mon, Karen, Shan as well.
 
 ```sh
 import pyidaungsu as pds
 
-# font encoding detection
+# language detection
 pds.detect("ထမင်းစားပြီးပြီလား")
->> "Unicode"
+>> "mm_uni"
+pds.detect("ထမင္းစားၿပီးၿပီလား")
+>> "mm_zg"
+pds.detect("တၢ်သိၣ်လိတၢ်ဖးလံာ် ကွဲးလံာ်အိၣ်လၢ မ့ရ့ၣ်အစုပူၤလီၤ.")
+>> "karen"
+pds.detect("ဇၟာပ်မၞိဟ်ဂှ် ကတဵုဒှ်ကၠုင် ပ္ဍဲကဵုဂကောံမွဲ ဖအိုတ်ရ၊၊")
+>> "mon"
+pds.detect("ၼႂ်းၼႃႈၼႆႉယင်းဢမ်ႇမီးလိၵ်ႈသင်တေႃႈလဵဝ်။")
+>> "shan"
 ```
 
 ### Zawgyi-Unicode conversion
