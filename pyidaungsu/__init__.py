@@ -1,11 +1,12 @@
 from pyidaungsu.tokenize import Tokenize
 import emoji
-import pyidaungsu.model.lib.fasttext_pybind as fasttext
-import re, os
+import fasttext
+import re, os, sys
 import numpy as np
 
-f = fasttext.fasttext()
-f.loadModel(os.path.join(os.path.abspath(os.path.dirname(__file__)),'model/pdsdetect.ftz'))
+sys.stdout = open(os.devnull, "w")
+sys.stderr = open(os.devnull, "w")
+f = fasttext.load_model(os.path.join(os.path.abspath(os.path.dirname(__file__)),'model/pdsdetect.ftz'))
 
 def cvt2zg(text):
     rules = [
@@ -29,29 +30,28 @@ def predict(text, k=1, threshold=0.0, on_unicode_error='strict'):
     def check(entry):
         if entry.find('\n') != -1:
             raise ValueError(
-                "predict processes one line at a time (remove \'\\n\')"
+                "predict processes one line at a time (remove newline)"
             )
         entry += "\n"
         return entry
 
     if type(text) == list:
-        text = [check(entry) for entry in text]
-        all_labels, all_probs = f.multilinePredict(
-            text, k, threshold, on_unicode_error)
-
+        #text = [check(entry) for entry in text]
+        all_labels, all_probs = f.multilinePredict(text, k, threshold, on_unicode_error)
         return all_labels, all_probs
     else:
-        text = check(text)
+        #text = check(text)
         predictions = f.predict(text, k, threshold, on_unicode_error)
         if predictions:
-            probs, labels = zip(*predictions)
+            #probs, labels = zip(*predictions)
+            probs, labels = predictions[1],predictions
         else:
             probs, labels = ([], ())
 
         return labels, np.array(probs, copy=False)
 
 def detect(text):
-    return predict(text)[0][0][9:]
+    return predict(text)[0][0][0][9:]
 
 def tokenize(text,lang='mm',form='syllable'):
     return Tokenize().tokenize(text, lang, form)
