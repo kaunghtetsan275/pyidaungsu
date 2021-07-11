@@ -4,7 +4,6 @@ import fasttext
 import re, os, sys
 import numpy as np
 
-sys.stdout = open(os.devnull, "w")
 sys.stderr = open(os.devnull, "w")
 f = fasttext.load_model(os.path.join(os.path.abspath(os.path.dirname(__file__)),'model/pdsdetect.ftz'))
 
