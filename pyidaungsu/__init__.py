@@ -4,7 +4,7 @@ import fasttext
 import re, os, sys
 import numpy as np
 
-sys.stderr = open(os.devnull, "w")
+fasttext.FastText.eprint = lambda x: None
 f = fasttext.load_model(os.path.join(os.path.abspath(os.path.dirname(__file__)),'model/pdsdetect.ftz'))
 
 def cvt2zg(text):
