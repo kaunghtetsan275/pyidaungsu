@@ -1,0 +1,5 @@
+numpy
+python-crfsuite
+emoji
+pybind11
+fasttext
