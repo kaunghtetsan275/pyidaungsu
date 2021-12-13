@@ -13,6 +13,9 @@ pip install pyidaungsu
 ### ~~Zawgyi-Unicode detection~~ Language detection (Myanmar <Zawgyi, Unicode>, Karen, Mon, Shan)
 Starting from the pyidaungsu 0.0.9, it does not only detect Zawgyi and Unicode for Myanmar language but also other languages such as Mon, Karen, Shan as well.
 
+Language detection for Mon and Shan is temporarily disabled starting from 0.1.3 as the accuracy for those languages wasn't as good.
+Supported languages ATM: English, Spanish, French, Chinese, Japanese, Korean, Myanmar (unicode), Myanmar (zawgyi), Karen
+
 ```sh
 import pyidaungsu as pds
 
