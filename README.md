@@ -1,4 +1,4 @@
-# Pyidaungsu
+# Pyidaungsu (Under maintenance)
 
 Python library for Myanmar language. Useful in Natural Language Processing and text preprocessing for Myanmar language.
 
